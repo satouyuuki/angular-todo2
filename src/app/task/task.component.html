@@ -3,7 +3,12 @@
   <input [(ngModel)]="title">
   <button (click)="add(title); title=''">追加</button>
 </div>
-{{test}}
+<div>
+  <label>
+    タグ検索: 
+    <input #searchKey (keyup)="search(searchKey.value)">
+  </label>
+</div>
 <ul>
   <li 
   *ngFor="let task of tasks"
@@ -19,6 +24,15 @@
     <button (click)="delete(task);">
       x
     </button>
+    <ng-container *ngIf="task.taskTag">
+      <ul>
+        <li *ngFor="let tag of task.taskTag">
+          {{tag}}
+        </li>
+      </ul>
+    </ng-container>
   </li>
 </ul>
-<app-task-detail [task]="selectedTask"></app-task-detail>
+<app-task-detail 
+[task]="selectedTask"
+></app-task-detail>

@@ -17,6 +17,10 @@ export class TaskService {
       'Content-Type': 'application/json'
     })
   }
+  // タスクをサーバーから取得(タグ検索)
+  searchTask(term: string): Observable<Tasks[]> {
+    return this.http.get<Tasks[]>(`${this.taskUrl}?taskTag=${term}`);
+  }
   // タスクをサーバーから取得
   getTask(): Observable<Tasks[]> {
     return this.http.get<Tasks[]>(this.taskUrl);

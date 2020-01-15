@@ -1,9 +1,17 @@
 <ng-container *ngIf="task">
   <h3>タスクの詳細</h3>
   <div>
-    タスク番号 {{task.id}}
-  </div>
-  <label>タスクの名前
+    <span>No. {{task.id}}</span>
     <input [(ngModel)]="task.taskName">
-  </label>
+  </div>
+  <div>
+    <input #tags>
+    <button (click)="addTag(tags.value); tags.value = ''">タグ追加</button>
+  </div>
+  <ng-container *ngIf="errorMessage">
+    <div>
+      {{errorMessage}}
+    </div>
+  </ng-container>
+  <textarea [(ngModel)]="task.taskContent" cols="50" rows="20"></textarea>
 </ng-container>

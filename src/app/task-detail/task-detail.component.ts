@@ -7,10 +7,19 @@ import { Tasks } from '../tasks';
 })
 export class TaskDetailComponent implements OnInit {
   @Input() task: Tasks;
-  
+  public errorMessage: string;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  // タグを追加する
+  addTag(tag) {
+    if(this.task.taskTag.length >= 10) {
+      this.errorMessage = '１０個までです';
+    } else {
+      this.task.taskTag.push(tag);
+    }
   }
 
 }

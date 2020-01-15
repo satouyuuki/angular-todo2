@@ -8,21 +8,29 @@ import { TaskService } from '../task.service';
 })
 export class TaskComponent implements OnInit {
   private tasks: Tasks[];
-  private selectedTask: Tasks;
+  public selectedTask: Tasks;
   constructor(
     private taskService: TaskService,
   ) { }
 
   ngOnInit() {
-    this.getTasks();
+    this.initTask();
+  }
+
+  // タグ検索
+  search(term) {
+    if(!term) {
+      this.initTask();
+    } else {
+      this.taskService.searchTask(term).subscribe(task => this.tasks = task);
+    }
   }
   // 初期画面描画タスク
-  getTasks(): void {
-    console.log('getTasks');
+  initTask(): void {
     this.taskService.getTask().subscribe(task => this.tasks = task);
   }
 
-  // タスクが洗濯された時
+  // タスクが選択された時
   onSelectedTask(task: Tasks) {
     this.selectedTask = task;
   }
@@ -38,10 +46,10 @@ export class TaskComponent implements OnInit {
       })
     }
   }
+  
   // 削除ボタン押されたとき
   delete(task: Tasks) {
     this.tasks = this.tasks.filter(t => t !== task)
-    // console.log(this.tasks);
     this.taskService.deleteTask(task).subscribe();
   }
 
