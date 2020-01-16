@@ -1,0 +1,10 @@
+<ng-container *ngIf="task">
+  <h3>タスクの詳細</h3>
+  <div>
+    <span>No. {{task.id}}</span>
+    <input [(ngModel)]="task.taskName">
+  </div>
+  <textarea [(ngModel)]="task.taskContent" cols="50" rows="20"></textarea>
+  <button mat-button (click)="onNoClick()">閉じる</button>
+  <button mat-button [mat-dialog-close]="data">OK</button>
+</ng-container>

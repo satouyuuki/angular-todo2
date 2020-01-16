@@ -24,6 +24,9 @@
     <button (click)="delete(task);">
       x
     </button>
+    <button (click)="openDialog(task);">
+      ?
+    </button>
     <ng-container *ngIf="task.taskTag">
       <ul>
         <li *ngFor="let tag of task.taskTag">
