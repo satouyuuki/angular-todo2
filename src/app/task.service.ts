@@ -25,6 +25,13 @@ export class TaskService {
   getTask(): Observable<Tasks[]> {
     return this.http.get<Tasks[]>(this.taskUrl);
   }
+  // タスクの完了フラグを変更する
+  doneTask(task: Tasks): Observable<Tasks> {
+    // const id = task.id;
+    task.doneFlag = true;
+    // const url = `${this.taskUrl}/${id}`;
+    return this.http.put<Tasks>(this.taskUrl, task, this.httpOptions);
+  }
   // サーバーにタスクをpostする
   addTask(task: Tasks): Observable<Tasks> {
     return this.http.post<Tasks>(this.taskUrl, task, this.httpOptions);

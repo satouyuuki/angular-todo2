@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material.module';
 import { TaskDialogModule } from './shared/task-dialog/task-dialog.module';
+import { TaskDoneComponent } from './task-done/task-done.component';
+import { AppRoutingModule } from './app-routing.module';
 // 超絶参考になった記事
 // https://angular.keicode.com/topics/angular-material-install.php
 @NgModule({
@@ -18,6 +20,7 @@ import { TaskDialogModule } from './shared/task-dialog/task-dialog.module';
     AppComponent,
     TaskComponent,
     TaskDetailComponent,
+    TaskDoneComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +32,7 @@ import { TaskDialogModule } from './shared/task-dialog/task-dialog.module';
     BrowserAnimationsModule,
     MaterialModule,
     TaskDialogModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

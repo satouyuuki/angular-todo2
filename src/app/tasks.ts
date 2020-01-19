@@ -3,4 +3,5 @@ export class Tasks {
   taskName: string;
   taskContent: string;
   taskTag: string[];
+  doneFlag: boolean;
 }

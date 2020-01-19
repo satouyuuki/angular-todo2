@@ -1,5 +1,8 @@
 <ng-container *ngIf="task">
   <h3>タスクの詳細</h3>
+  <h4>
+    {{task.doneFlag}}
+  </h4>
   <div>
     <span>No. {{task.id}}</span>
     <input [(ngModel)]="task.taskName">

@@ -33,7 +33,10 @@ export class TaskComponent implements OnInit {
   }
   // 初期画面描画タスク
   initTask(): void {
-    this.taskService.getTask().subscribe(task => this.tasks = task);
+    this.taskService.getTask().subscribe(task => {
+      this.tasks = task.filter(t => t.doneFlag !== true);
+      console.log(task);
+    });
   }
 
   // ダイアログが選択されたとき
@@ -63,13 +66,20 @@ export class TaskComponent implements OnInit {
     this.selectedTask = task;
   }
 
+  // 完了ボタンが押されたとき
+  done(task: Tasks) {
+    console.log(task);
+    this.taskService.doneTask(task).subscribe();
+    this.initTask();
+  }
+
   // 追加ボタン押されたとき
   add(value: string) {
     const taskName = value.trim();
     if(!taskName) {
       return;
     } else {
-      this.taskService.addTask({taskName} as Tasks).subscribe(task => {
+      this.taskService.addTask({taskName, doneFlag: false} as Tasks).subscribe(task => {
         this.tasks.push(task);
       })
     }

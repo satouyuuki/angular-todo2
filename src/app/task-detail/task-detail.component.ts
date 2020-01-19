@@ -15,6 +15,8 @@ export class TaskDetailComponent implements OnInit {
 
   // タグを追加する
   addTag(tag) {
+    tag = tag.trim();
+    if(!tag) return;
     if(this.task.taskTag.length >= 10) {
       this.errorMessage = '１０個までです';
     } else {
