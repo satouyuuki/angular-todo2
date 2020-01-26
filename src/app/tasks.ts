@@ -4,4 +4,5 @@ export class Tasks {
   taskContent: string;
   taskTag: string[];
   doneFlag: boolean;
+  timeLimit?: any;
 }

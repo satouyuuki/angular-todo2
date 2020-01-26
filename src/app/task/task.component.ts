@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Tasks } from '../tasks';
 import { TaskService } from '../task.service';
 // MatDialogサービス
 import { MatDialog } from '@angular/material/dialog';
 import { TaskDialogComponent } from '../shared/task-dialog/task-dialog.component';
+import { FlatpickrOptions } from 'ng2-flatpickr';
+import  Japanese  from 'flatpickr/dist/l10n/ja.js';
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -13,6 +17,15 @@ export class TaskComponent implements OnInit {
   private tasks: Tasks[];
   public selectedTask: Tasks;
   public dialogTask: Tasks;
+  public now: Observable<Date>;
+  // private intervalList = [];
+  private options: FlatpickrOptions = {
+    locale: Japanese,
+    enableTime: true,
+    time_24hr: true,
+    minDate: new Date(),
+  };
+  
   constructor(
     private taskService: TaskService,
     // 1.MatDialogサービスのDI
@@ -21,7 +34,23 @@ export class TaskComponent implements OnInit {
 
   ngOnInit() {
     this.initTask();
+    // this.now = new Observable((observer) => {
+    //   this.intervalList.push(setInterval(() => {
+    //     observer.next(new Date());
+    //     // console.log(observer);// Subscriber{}
+    //   }, 1000));
+    // })
   }
+
+  ngOnDestroy() {
+    // if(this.intervalList) {
+    //   this.intervalList.forEach((interval) => {
+    //     clearInterval(interval);
+    //   })
+    // }
+  }
+
+
 
   // タグ検索
   search(term) {
@@ -74,12 +103,13 @@ export class TaskComponent implements OnInit {
   }
 
   // 追加ボタン押されたとき
-  add(value: string) {
+  add(value: string, timeLimit?: any) {
     const taskName = value.trim();
+    console.log(timeLimit);
     if(!taskName) {
       return;
     } else {
-      this.taskService.addTask({taskName, doneFlag: false} as Tasks).subscribe(task => {
+      this.taskService.addTask({taskName, doneFlag: false, timeLimit} as Tasks).subscribe(task => {
         this.tasks.push(task);
       })
     }

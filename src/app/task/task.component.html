@@ -1,22 +1,35 @@
 <h2>タスク管理アプリ</h2>
 <div>
-  <input [(ngModel)]="title">
-  <button (click)="add(title); title=''">追加</button>
+  {{ now | async | date:'yyyy年MM月dd日 HH:mm:ss' }}
+</div>
+<div>
+  <input [(ngModel)]="title" placeholder="タスクの名前">
+  <button (click)="add(title, timeLimit); title=''">追加</button>
+</div>
+<div>
+  <label>
+    有効期限：
+    <input type="checkbox" [(ngModel)]="test">
+  </label>
+  <ng-container *ngIf="test">
+    <ng2-flatpickr [(ngModel)]="timeLimit" [config]="options"></ng2-flatpickr>
+  </ng-container>
+  {{timeLimit | json}}
 </div>
 <div>
   <label>
     タグ検索: 
-    <input #searchKey (keyup)="search(searchKey.value)">
+    <input #searchKey (keyup)="search(searchKey.value)" placeholder="タグの名前">
   </label>
 </div>
 <ul>
   <li 
-  *ngFor="let task of tasks"
+  *ngFor="let task of tasks;index as i"
   (click)="onSelectedTask(task)"
   [class.selected]="selectedTask === task"
   >
     <span>
-      {{task.id}}
+      No. {{i + 1}}
     </span>
     <span>
       {{task.taskName}}
@@ -30,6 +43,15 @@
     <button (click)="done(task);">
       完了
     </button>
+    <ng-container *ngIf="task.timeLimit">
+      <div>
+        有効期限:
+        {{timeLimit | taskDate}}
+      </div>
+      <div *ngIf="timeLimit > now">
+        timelimit!!
+      </div>
+    </ng-container>
     <ng-container *ngIf="task.taskTag">
       <ul>
         <li *ngFor="let tag of task.taskTag">

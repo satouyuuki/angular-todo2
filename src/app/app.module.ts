@@ -15,12 +15,15 @@ import { TaskDoneComponent } from './task-done/task-done.component';
 import { AppRoutingModule } from './app-routing.module';
 // 超絶参考になった記事
 // https://angular.keicode.com/topics/angular-material-install.php
+import { Ng2FlatpickrModule } from 'ng2-flatpickr';
+import { TaskDatePipe } from './pipe/task-date.pipe';
 @NgModule({
   declarations: [
     AppComponent,
     TaskComponent,
     TaskDetailComponent,
     TaskDoneComponent,
+    TaskDatePipe,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +36,7 @@ import { AppRoutingModule } from './app-routing.module';
     MaterialModule,
     TaskDialogModule,
     AppRoutingModule,
+    Ng2FlatpickrModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
