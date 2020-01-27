@@ -9,21 +9,18 @@ import { InMemoryDataService } from './in-memory-data.service';
 import { TaskDetailComponent } from './task-detail/task-detail.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './shared/material.module';
-import { TaskDialogModule } from './shared/task-dialog/task-dialog.module';
 import { TaskDoneComponent } from './task-done/task-done.component';
 import { AppRoutingModule } from './app-routing.module';
 // 超絶参考になった記事
 // https://angular.keicode.com/topics/angular-material-install.php
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
-import { TaskDatePipe } from './pipe/task-date.pipe';
+import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
     TaskComponent,
     TaskDetailComponent,
     TaskDoneComponent,
-    TaskDatePipe,
   ],
   imports: [
     BrowserModule,
@@ -33,10 +30,9 @@ import { TaskDatePipe } from './pipe/task-date.pipe';
       InMemoryDataService, {dataEncapsulation: false}
     ),
     BrowserAnimationsModule,
-    MaterialModule,
-    TaskDialogModule,
     AppRoutingModule,
     Ng2FlatpickrModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

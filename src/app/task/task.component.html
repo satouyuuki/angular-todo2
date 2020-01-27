@@ -22,14 +22,24 @@
     <input #searchKey (keyup)="search(searchKey.value)" placeholder="タグの名前">
   </label>
 </div>
-<ul>
-  <li 
+    <!-- <h4 mat-line>{{folder.name}}</h4>
+    <p mat-line> {{folder.updated | date}} </p>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+  <mat-action-list>
+    <button mat-list-item (click)="save()"> Save </button>
+    <button mat-list-item (click)="undo()"> Undo </button>
+  </mat-action-list>
+</mat-list> -->
+<mat-list>
+  <mat-list-item  
   *ngFor="let task of tasks;index as i"
   (click)="onSelectedTask(task)"
   [class.selected]="selectedTask === task"
   >
+    <mat-icon>drag_indicator</mat-icon>
     <span>
-      No. {{i + 1}}
+      No. {{task.id}}
     </span>
     <span>
       {{task.taskName}}
@@ -59,8 +69,9 @@
         </li>
       </ul>
     </ng-container>
-  </li>
-</ul>
+    <mat-divider></mat-divider>
+  </mat-list-item >
+</mat-list>
 <app-task-detail 
 [task]="selectedTask"
 ></app-task-detail>
